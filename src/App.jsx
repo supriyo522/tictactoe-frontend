@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./index.css";
+import "./App.css";
 
 const App = () => {
   const [board, setBoard] = useState(Array(9).fill(null));

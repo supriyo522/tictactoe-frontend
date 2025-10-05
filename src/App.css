@@ -1,158 +1,102 @@
 body {
-  background-color: #ffffff;
-  font-family: "Poppins", sans-serif;
+  background-color: #f7f8fa;
+  font-family: Arial, sans-serif;
   text-align: center;
   margin: 0;
   padding: 0;
 }
 
 .app {
-  margin-top: 50px;
+  max-width: 400px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
-.title {
-  font-size: 36px;
-  font-weight: 800;
+h1 {
   margin-bottom: 20px;
-  color: #0d0d0d;
+  color: #222;
 }
 
 .scoreboard {
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  font-size: 18px;
-  margin-bottom: 10px;
+  justify-content: space-around;
+  margin-bottom: 15px;
+  font-weight: bold;
 }
 
-.x-score {
-  color: #e74c3c;
-  font-weight: 600;
-}
-
-.o-score {
-  color: #3498db;
-  font-weight: 600;
-}
-
-.draw-score {
-  color: #2c2c2c;
-  font-weight: 600;
-}
-
-.turn,
 .winner {
-  font-size: 18px;
-  margin: 10px 0 15px;
-  font-weight: 500;
+  color: #28a745;
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.turn {
+  margin-bottom: 15px;
+  font-size: 16px;
 }
 
 .board {
   display: grid;
-  grid-template-columns: repeat(3, 100px);
-  grid-template-rows: repeat(3, 100px);
-  gap: 0;
+  grid-template-columns: repeat(3, 80px);
+  grid-template-rows: repeat(3, 80px);
+  gap: 10px;
   justify-content: center;
   margin: 20px auto;
-  border: 3px solid #333; /* outer border */
 }
 
 .cell {
-  width: 100px;
-  height: 100px;
-  background: #ffffff;
-  border: 1px solid #333; /* cell borders for 3x3 separation */
-  font-size: 36px;
-  font-weight: 700;
+  width: 80px;
+  height: 80px;
+  font-size: 28px;
+  font-weight: bold;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  border: 2px solid #333;
+  border-radius: 8px;
+  background: #f0f0f0;
+  transition: background 0.2s;
 }
 
 .cell:hover {
-  background-color: #f0f0f0;
+  background: #e0e0e0;
 }
 
-.cell.x {
-  color: #e74c3c;
+.x {
+  color: red;
 }
 
-.cell.o {
-  color: #3498db;
+.o {
+  color: blue;
 }
 
 .buttons {
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin-top: 25px;
+  margin-top: 20px;
 }
 
 .restart-btn {
-  background-color: #2563eb;
+  background-color: #007bff;
   color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 18px;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: 500;
-}
-
-.restart-btn:hover {
-  background-color: #1e40af;
 }
 
 .reset-btn {
-  background-color: #ffffff;
-  color: #000;
-  border: 1px solid #ccc;
+  background-color: white;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+
+button {
+  padding: 8px 14px;
+  font-size: 15px;
   border-radius: 8px;
-  padding: 10px 18px;
-  font-size: 16px;
   cursor: pointer;
-  font-weight: 500;
+  transition: background 0.3s;
 }
 
-.reset-btn:hover {
-  background-color: #f2f2f2;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .board {
-    grid-template-columns: repeat(3, 80px);
-    grid-template-rows: repeat(3, 80px);
-  }
-
-  .cell {
-    width: 80px;
-    height: 80px;
-    font-size: 30px;
-  }
-
-  .title {
-    font-size: 28px;
-  }
-}
-
-@media (max-width: 320px) {
-  .board {
-    grid-template-columns: repeat(3, 60px);
-    grid-template-rows: repeat(3, 60px);
-  }
-
-  .cell {
-    width: 60px;
-    height: 60px;
-    font-size: 24px;
-  }
-
-  .title {
-    font-size: 24px;
-  }
-
-  .buttons {
-    flex-direction: column;
-    gap: 10px;
-  }
+button:hover {
+  opacity: 0.9;
 }
