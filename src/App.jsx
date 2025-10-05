@@ -4,8 +4,9 @@ import "./index.css";
 const App = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
+  const [score, setScore] = useState({ X: 0, O: 0, Draws: 0 });
   const [winner, setWinner] = useState(null);
-  const [score, setScore] = useState({ X: 0, O: 0 });
+  const [turn, setTurn] = useState("X");
 
   const calculateWinner = (squares) => {
     const lines = [
@@ -37,8 +38,12 @@ const App = () => {
     if (win) {
       setWinner(win);
       setScore((prev) => ({ ...prev, [win]: prev[win] + 1 }));
+    } else if (newBoard.every(Boolean)) {
+      setWinner("Draw");
+      setScore((prev) => ({ ...prev, Draws: prev.Draws + 1 }));
     } else {
       setIsXNext(!isXNext);
+      setTurn(isXNext ? "O" : "X");
     }
   };
 
@@ -46,37 +51,56 @@ const App = () => {
     setBoard(Array(9).fill(null));
     setWinner(null);
     setIsXNext(true);
+    setTurn("X");
   };
 
   const handleResetAll = () => {
     setBoard(Array(9).fill(null));
     setWinner(null);
-    setScore({ X: 0, O: 0 });
     setIsXNext(true);
+    setTurn("X");
+    setScore({ X: 0, O: 0, Draws: 0 });
   };
 
   return (
     <div className="app">
-      <h1>Tic-Tac-Toe</h1>
+      <h1 className="title">Tic-Tac-Toe</h1>
 
       <div className="scoreboard">
-        <p>Player X: {score.X}</p>
-        <p>Player O: {score.O}</p>
+        <p className="x-score">
+          X: <span>{score.X}</span>
+        </p>
+        <p className="draw-score">
+          Draws: <span>{score.Draws}</span>
+        </p>
+        <p className="o-score">
+          O: <span>{score.O}</span>
+        </p>
       </div>
 
-      {winner && <h2 className="winner">Player {winner} Wins!</h2>}
+      {!winner && <p className="turn">Turn: {turn}</p>}
+      {winner && winner !== "Draw" && <p className="winner">Winner: {winner}</p>}
+      {winner === "Draw" && <p className="winner">It's a Draw!</p>}
 
       <div className="board">
         {board.map((value, index) => (
-          <button key={index} className="cell" onClick={() => handleClick(index)}>
+          <button
+            key={index}
+            className={`cell ${value === "X" ? "x" : value === "O" ? "o" : ""}`}
+            onClick={() => handleClick(index)}
+          >
             {value}
           </button>
         ))}
       </div>
 
       <div className="buttons">
-        <button onClick={handleRestartRound}>Restart Round</button>
-        <button onClick={handleResetAll}>Reset All</button>
+        <button className="restart-btn" onClick={handleRestartRound}>
+          Restart Round
+        </button>
+        <button className="reset-btn" onClick={handleResetAll}>
+          Reset All
+        </button>
       </div>
     </div>
   );
